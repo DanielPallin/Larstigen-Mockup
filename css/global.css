@@ -1,0 +1,50 @@
+/* css/global.css */
+
+:root {
+  /* Färgpalett */
+  --primary-green: #9daa75;
+  --accent-blue: #aed5eb;
+  --light-blue: #e3f5ff;
+  --bg-light: #ececec;
+  --white: #ffffff;
+  --text-dark: #49433e;
+
+  /* Typsnitt */
+  --font-header: "DIN Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.5;
+  padding-bottom: 80px; /* Plats för bottenmeny */
+}
+
+/* Gemensamma rubriker */
+h1, h2, h3, .card-title {
+  font-family: var(--font-header);
+  text-transform: uppercase;
+}
+
+/* Gemensamma knappar som alla kan använda */
+.btn {
+  display: inline-block;
+  background-color: var(--primary-green);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-family: var(--font-header);
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
