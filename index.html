@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lärstigen - Logga in</title>
+    
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    
+    <script type="module" src="/ts/login.ts"></script>
+
+    <style>
+      .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+        padding: 20px;
+      }
+      .login-logo {
+        width: 120px;
+        margin-bottom: 20px;
+      }
+      .login-wrapper {
+        width: 100%;
+        max-width: 400px;
+      }
+      
+      /* Flik-design (Tabs) */
+      .tab-container {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ddd;
+      }
+      .tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        font-family: var(--font-header);
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #888;
+        transition: all 0.2s ease;
+      }
+      .tab.active {
+        color: var(--primary-green);
+        border-bottom: 3px solid var(--primary-green);
+      }
+
+      /* Formulär-sektioner */
+      .form-section {
+        display: none;
+      }
+      .form-section.active {
+        display: block;
+      }
+
+      .input-field {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      /* Design för sociala inloggningar / Placeholders */
+      .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 20px 0;
+        color: #888;
+      }
+      .divider::before, .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #ddd;
+      }
+      .divider span {
+        padding: 0 10px;
+        font-size: 0.9rem;
+      }
+
+      .btn-social {
+        background-color: var(--white);
+        color: var(--text-dark);
+        border: 1px solid #ccc;
+        margin-top: 10px;
+        font-family: var(--font-body); /* Använder body-typsnittet för modernare look */
+        text-transform: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      
+      /* Specifika varumärkesfärger för knapparna */
+      .btn-bankid {
+        background-color: #1f4f7a;
+        color: white;
+        border: none;
+      }
+      .btn-apple {
+        background-color: #000;
+        color: white;
+        border: none;
+      }
+      .btn-google {
+        /* Standard vit med grå kant från .btn-social räcker */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <img src="assets/favicon.PNG" alt="Lärstigen Logo" class="login-logo" />
+      <h1 style="margin-bottom: 30px; font-size: 2.5rem; color: var(--primary-green);">Lärstigen</h1>
+      
+      <div class="login-wrapper">
+        
+        <div class="tab-container">
+          <div class="tab active" id="tab-parent" onclick="switchTab('parent')">Vårdnadshavare</div>
+          <div class="tab" id="tab-staff" onclick="switchTab('staff')">Personal</div>
+        </div>
+
+        <div class="card" style="margin-bottom: 0;">
+          
+          <div id="view-parent" class="form-section active">
+            <h3 class="card-title">Logga in</h3>
+            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">
+              Logga in med din e-post för att se ditt barns dag.
+            </p>
+            
+            <form id="parent-login-form">
+              <input type="email" id="parent-email" class="input-field" placeholder="E-postadress" required />
+              <input type="password" id="parent-password" class="input-field" placeholder="Lösenord" required />
+              <button type="submit" class="btn">Logga in</button>
+            </form>
+
+            <div class="divider">
+              <span>eller</span>
+            </div>
+
+            <button type="button" class="btn btn-social btn-bankid" onclick="alert('I denna prototyp simulerar vi BankID-inloggning.')">
+              Logga in med Mobilt BankID
+            </button>
+            <button type="button" class="btn btn-social btn-google" onclick="alert('Google-inloggning är inte aktiverat i prototypen.')">
+              Logga in med Google
+            </button>
+            <button type="button" class="btn btn-social btn-apple" onclick="alert('Apple-inloggning är inte aktiverat i prototypen.')">
+              Logga in med Apple
+            </button>
+          </div>
+
+          <div id="view-staff" class="form-section">
+            <h3 class="card-title">Personalinloggning</h3>
+            <p style="margin-bottom: 15px; font-size: 0.9rem; color: #666;">
+              Logga in med din e-post för att administrera avdelningen.
+            </p>
+            
+            <form id="login-form">
+              <input type="email" id="email" class="input-field" placeholder="E-postadress" required />
+              <input type="password" id="password" class="input-field" placeholder="Lösenord" required />
+              <button type="submit" class="btn">Logga in</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function switchTab(role) {
+        document.getElementById('tab-parent').classList.remove('active');
+        document.getElementById('tab-staff').classList.remove('active');
+        document.getElementById('view-parent').classList.remove('active');
+        document.getElementById('view-staff').classList.remove('active');
+
+        document.getElementById('tab-' + role).classList.add('active');
+        document.getElementById('view-' + role).classList.add('active');
+      }
+    </script>
+  </body>
+</html>
