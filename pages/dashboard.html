@@ -4,8 +4,294 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DASHBOARD</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
-  HANNAS SIDA
+
+<div id="root"></div>
+
+<script type="module">
+  import React from 'https://esm.sh/react';
+  import ReactDOM from 'https://esm.sh/react-dom/client';
+
+  const mockData = {
+    siblings: [
+      { id: 1, name: 'Alice', avatar: '👧', color: 'blue' },
+      { id: 2, name: 'Bob', avatar: '👦', color: 'yellow' },
+    ],
+
+    importantUpdates: [
+      { id: 1, childId: 1, message: 'Skolutflykt på fredag!' },
+      { id: 2, childId: 2, message: 'Glöm inte att ta med regnkläder imorgon fredag.' },
+    ],
+
+    upcomingEvents: [
+      { id: 1, childId: 1, title: 'Föräldramöte', date: '2024-06-10' },
+      { id: 2, childId: 2, title: 'Skolavslutning', date: '2024-06-20' },
+    ],
+  };
+
+  function Dashboard() {
+    const [selectedChildren, setSelectedChildren] = React.useState([]);
+    const [pickupName, setPickupName] = React.useState("");
+    const [savedPickupName, setSavedPickupName] = React.useState("");
+
+    function toggleChild(id) {
+      setSelectedChildren((prev) =>
+        prev.includes(id)
+          ? prev.filter((childId) => childId !== id)
+          : [...prev, id]
+      );
+    }
+
+    const filteredUpdates =
+      selectedChildren.length === 0
+        ? mockData.importantUpdates
+        : mockData.importantUpdates.filter((update) =>
+            selectedChildren.includes(update.childId)
+          );
+
+    const filteredUpcoming =
+      selectedChildren.length === 0
+        ? mockData.upcomingEvents
+        : mockData.upcomingEvents.filter((event) =>
+            selectedChildren.includes(event.childId)
+          );
+
+    function getChildById(childId) {
+      return mockData.siblings.find((sibling) => sibling.id === childId);
+    }
+
+    return React.createElement(
+      "div",
+      { className: "dashboard" },
+
+      React.createElement("h1", null, "Överblick"),
+
+      React.createElement(
+        "section",
+        { className: "siblings-view" },
+        React.createElement("h2", null, "Välj barn"),
+
+        React.createElement(
+          "div",
+          { className: "siblings-list" },
+
+          ...mockData.siblings.map((sibling) =>
+            React.createElement(
+              "label",
+              {
+                key: sibling.id,
+                className: `sibling-card selectable sibling-${sibling.color} ${
+                  selectedChildren.includes(sibling.id) ? "active" : ""
+                }`
+              },
+
+              React.createElement("input", {
+                type: "checkbox",
+                checked: selectedChildren.includes(sibling.id),
+                onChange: () => toggleChild(sibling.id)
+              }),
+
+              React.createElement(
+                "span",
+                { className: "avatar" },
+                sibling.avatar
+              ),
+
+              React.createElement(
+                "p",
+                null,
+                `${sibling.name}`
+              )
+            )
+          )
+        )
+      ),
+
+      React.createElement(
+        "section",
+        { className: "important-updates" },
+        React.createElement("h2", null, "Viktiga uppdateringar"),
+
+        React.createElement(
+          "ul",
+          null,
+
+          ...(filteredUpdates.length > 0
+            ? filteredUpdates.map((update) => {
+                const child = getChildById(update.childId);
+
+                return React.createElement(
+                  "li",
+                  {
+                    key: update.id,
+                    className: `notice-item notice-${child.color}`
+                  },
+
+                  React.createElement(
+                    "span",
+                    { className: `child-tag child-tag-${child.color}` },
+                    child.name
+                  ),
+
+                  React.createElement(
+                    "span",
+                    { className: "notice-text" },
+                    update.message
+                  )
+                );
+              })
+            : [
+                React.createElement(
+                  "li",
+                  { key: "empty-updates" },
+                  "Inga viktiga uppdateringar för valt barn."
+                )
+              ])
+        )
+      ),
+
+      React.createElement(
+        "section",
+        { className: "pickup-section" },
+
+        React.createElement("h2", null, "Vem hämtar idag"),
+
+        React.createElement(
+          "form",
+          {
+            onSubmit: (e) => {
+              e.preventDefault();
+              setSavedPickupName(pickupName);
+            }
+          },
+
+          React.createElement(
+            "label",
+            null,
+            "Namn:",
+            React.createElement("input", {
+              type: "text",
+              value: pickupName,
+              onChange: (e) => setPickupName(e.target.value),
+              placeholder: "Skriv namn här",
+              required: true
+            })
+          ),
+
+          React.createElement(
+            "button",
+            { type: "submit" },
+            "Spara"
+          )
+        ),
+
+        savedPickupName &&
+          React.createElement(
+            "p",
+            { className: "saved-pickup" },
+            `Idag hämtar: ${savedPickupName}`
+          )
+      ),
+
+      React.createElement(
+        "section",
+        { className: "absence-report" },
+
+        React.createElement("h2", null, "Frånvaroanmälan"),
+
+        React.createElement(
+          "form",
+          {
+            onSubmit: (e) => {
+              e.preventDefault();
+              console.log("Frånvaro för barn:", selectedChildren);
+            }
+          },
+
+          React.createElement(
+            "p",
+            { className: "selected-children-text" },
+            selectedChildren.length > 0
+              ? `Valda barn: ${mockData.siblings
+                  .filter((sibling) => selectedChildren.includes(sibling.id))
+                  .map((sibling) => sibling.name)
+                  .join(", ")}`
+              : "Välj barn högst upp först"
+          ),
+
+          React.createElement(
+            "label",
+            null,
+            "Frånvaro datum:",
+            React.createElement("input", {
+              type: "date",
+              required: true
+            })
+          ),
+
+          React.createElement(
+            "button",
+            {
+              type: "submit",
+              disabled: selectedChildren.length === 0
+            },
+            "Anmäl frånvaro"
+          )
+        )
+      ),
+
+      React.createElement(
+        "section",
+        { className: "upcoming-events" },
+        React.createElement("h2", null, "Kommande händelser"),
+
+        React.createElement(
+          "ul",
+          null,
+
+          ...(filteredUpcoming.length > 0
+            ? filteredUpcoming.map((event) => {
+                const child = getChildById(event.childId);
+
+                return React.createElement(
+                  "li",
+                  {
+                    key: event.id,
+                    className: `event-item event-${child.color}`
+                  },
+
+                  React.createElement(
+                    "span",
+                    { className: `child-tag child-tag-${child.color}` },
+                    child.name
+                  ),
+
+                  React.createElement(
+                    "span",
+                    { className: "event-text" },
+                    `${event.date} - ${event.title}`
+                  )
+                );
+              })
+            : [
+                React.createElement(
+                  "li",
+                  { key: "empty-events" },
+                  "Inga kommande händelser för valt barn."
+                )
+              ])
+        )
+      )
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    React.createElement(Dashboard)
+  );
+</script>
+
+
 </body>
 </html>
