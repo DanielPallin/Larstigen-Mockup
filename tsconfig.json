@@ -6,5 +6,5 @@
     "types": ["vite/client"], 
     "strict": true
   },
-  "include": ["ts/**/*.ts"]
+"include": ["ts/**/*.ts", "css/**/*.css"]
 }
