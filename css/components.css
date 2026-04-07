@@ -1,30 +1,44 @@
-/* Header med Logo */
-header {
-  background-color: var(--white);
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+/* Header */
+.site-header {
   position: sticky;
   top: 0;
   z-index: 100;
+  background: var(--white);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.shrink {
+  padding: 10px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .logo-small {
-  height: 40px;
-  margin-right: 15px;
+  display: block;
+  width: 96px;
+  height: auto;
+  object-fit: contain;
+  transition: width 0.3s ease;
 }
 
-header h1 {
-  font-size: 1.8rem;
-  letter-spacing: 1px;
+.site-header.shrink .logo-small {
+  width: 44px;
 }
 
-/* Container & Grid för Desktop */
+/* Layout */
 .container {
-  padding: 15px;
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  padding: 15px;
 }
 
 @media (min-width: 768px) {
@@ -33,61 +47,153 @@ header h1 {
     grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
+
   .full-width {
     grid-column: span 2;
   }
 }
 
-/* Generella Kort */
+/* Cards */
 .card {
+  margin-bottom: 15px;
+  padding: 20px;
   background: var(--white);
   border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-soft);
 }
 
 .card-title {
+  margin-bottom: 12px;
   font-size: 1.4rem;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
   color: var(--primary-green);
 }
 
-/* Generella Knappar */
-.btn {
-  display: inline-block;
-  background-color: var(--primary-green);
-  color: var(--white);
-  padding: 12px 24px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-family: var(--font-header);
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  text-align: center;
-  font-size: 1.1rem;
-  margin-top: 10px;
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
-/* Bottennavigering */
-nav.bottom-nav {
+.label {
+  display: inline-block;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Knappar */
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  background: var(--primary-green);
+  color: var(--white);
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: var(--font-header);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.95;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  font-size: 2rem;
+}
+
+/* Nav */
+.bottom-nav {
   position: fixed;
   bottom: 0;
+  left: 0;
+  z-index: 110;
   width: 100%;
-  background: var(--white);
+
   display: flex;
   justify-content: space-around;
-  padding: 12px 0;
-  border-top: 1px solid #ddd;
+  align-items: center;
+
+  padding: 10px 0;
+  background: var(--white);
+  border-top: 1px solid #e5e5e5;
+
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.bottom-nav.hide {
+  transform: translateY(100%);
 }
 
 .nav-item {
-  font-size: 1.5rem;
-  color: var(--text-dark);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 50px;
+
+  color: #9a958f;
   text-decoration: none;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.nav-item:active {
+  transform: scale(0.92);
+}
+
+.nav-item.active {
+  color: var(--primary-green);
+}
+
+.nav-icon {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+.nav-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-item.active .nav-icon svg {
+  transform: scale(1.1);
+}
+
+@media (hover: hover) {
+  .nav-item:hover {
+    color: var(--primary-green);
+  }
 }

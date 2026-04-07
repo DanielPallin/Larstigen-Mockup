@@ -3,27 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lärstigen - Barnprofil</title>
-    
-    <link rel="stylesheet" href="../css/global.css" />
-    
-    <link rel="stylesheet" href="../css/components.css" />
-    
-    <link rel="stylesheet" href="../css/barnprofil.css" />
-
+    <title>Lärstigen - Profil</title>
+    <script type="module" src="../ts/profil.ts"></script>
   </head>
 
   <body>
-    <header>
-      <img
-        src="/assets/favicon.PNG"
-        alt="Logo"
-        class="logo-small"
-      />
-      <h1>Lärstigen</h1>
+    <header class="site-header">
+      <div class="header-inner">
+        <img src="../assets/L-logo.png" alt="Lärstigen logotyp" class="logo-small" />
+      </div>
     </header>
 
-    <div class="container">
+    <main class="container">
       <div class="card full-width">
         <div class="profile-header">
           <div class="avatar">👶</div>
@@ -60,14 +51,34 @@
         <p><strong>Erik (Pappa):</strong> 070-444 55 66</p>
         <button class="btn">Redigera profil</button>
       </div>
-    </div>
+    </main>
 
     <nav class="bottom-nav">
-      <a href="index.html" class="nav-item">🏠</a>
-      <a href="kalender.html" class="nav-item">📅</a>
-      <a href="barnprofil.html" class="nav-item" style="color: var(--primary-green)">ℹ️</a>
-      <a href="dagbok.html" class="nav-item">📖</a>
-      <a href="meddelanden.html" class="nav-item">😊</a>
+      <a href="dashboard.html" class="nav-item">
+        <span class="nav-icon" data-icon="home" aria-hidden="true"></span>
+        <span class="sr-only">Dashboard</span>
+      </a>
+
+      <a href="kalender.html" class="nav-item">
+        <span class="nav-icon" data-icon="calendar" aria-hidden="true"></span>
+        <span class="sr-only">Kalender</span>
+      </a>
+
+      <a href="information.html" class="nav-item">
+        <span class="nav-icon" data-icon="alert-circle" aria-hidden="true"></span>
+        <span class="sr-only">Information</span>
+      </a>
+
+      <a href="loggbok.html" class="nav-item">
+        <span class="nav-icon" data-icon="book-open" aria-hidden="true"></span>
+        <span class="sr-only">Loggbok</span>
+      </a>
+
+      <a href="profil.html" class="nav-item">
+        <span class="nav-icon" data-icon="smile" aria-hidden="true"></span>
+        <span class="sr-only">Profil</span>
+      </a>
     </nav>
+
   </body>
 </html>

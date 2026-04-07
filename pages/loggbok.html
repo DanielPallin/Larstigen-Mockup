@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lärstigen - Loggbok</title>
+    <script type="module" src="../ts/loggbok.ts"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <img src="../assets/L-logo.png" alt="Lärstigen logotyp" class="logo-small" />
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card full-width">
+        <div class="profile-header">
+          <div class="avatar" aria-hidden="true">👶</div>
+
+          <div>
+            <h2>Alice Andersson</h2>
+            <p class="subtitle">Avdelning: Solstrålen</p>
+            <p class="log-date">Måndag 6 april</p>
+          </div>
+        </div>
+
+        <p class="day-summary">
+          En lugn och fin dag med mycket utelek, bra lunch och en kort vila efter maten.
+        </p>
+      </section>
+
+      <section class="card full-width">
+        <h3 class="card-title">Dagens överblick</h3>
+
+        <div class="overview-grid">
+          <div class="overview-item">
+            <span class="label">Incheckad</span>
+            <p>08:12</p>
+          </div>
+
+          <div class="overview-item">
+            <span class="label">Lunch</span>
+            <p>Åt bra</p>
+          </div>
+
+          <div class="overview-item">
+            <span class="label">Vila</span>
+            <p>45 min</p>
+          </div>
+
+          <div class="overview-item">
+            <span class="label">Utevistelse</span>
+            <p>Ja</p>
+          </div>
+
+          <div class="overview-item">
+            <span class="label">Humör</span>
+            <p>Glad</p>
+          </div>
+
+          <div class="overview-item">
+            <span class="label">Hämtad</span>
+            <p>15:27</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="timeline">
+        <article class="card log-entry" data-type="activity">
+          <div class="entry-top">
+            <span class="entry-time">09:10</span>
+            <span class="entry-tag">Aktivitet</span>
+          </div>
+
+          <h3 class="entry-title">Samling</h3>
+          <p>
+            Alice deltog fint i samlingen och var särskilt engagerad under sångstunden.
+          </p>
+        </article>
+
+        <article class="card log-entry" data-type="activity">
+          <div class="entry-top">
+            <span class="entry-time">10:25</span>
+            <span class="entry-tag">Utelek</span>
+          </div>
+
+          <h3 class="entry-title">Lek ute på gården</h3>
+          <p>
+            Vi var ute en längre stund. Alice lekte i sandlådan och åkte rutschkana med de andra barnen.
+          </p>
+
+          <img
+            src="../assets/sample-outdoor.jpg"
+            alt="Alice leker ute på gården"
+            class="entry-image"
+          />
+        </article>
+
+        <article class="card log-entry" data-type="meal">
+          <div class="entry-top">
+            <span class="entry-time">11:40</span>
+            <span class="entry-tag">Måltid</span>
+          </div>
+
+          <h3 class="entry-title">Lunch</h3>
+          <p>Åt bra av dagens lunch och drack vatten till maten.</p>
+        </article>
+
+        <article class="card log-entry" data-type="rest">
+          <div class="entry-top">
+            <span class="entry-time">13:00</span>
+            <span class="entry-tag">Vila</span>
+          </div>
+
+          <h3 class="entry-title">Vila</h3>
+          <p>Vilade i cirka 45 minuter och somnade tryggt med sin blå filt.</p>
+        </article>
+
+        <article class="card log-entry important" data-type="note">
+          <div class="entry-top">
+            <span class="entry-time">14:50</span>
+            <span class="entry-tag">Meddelande</span>
+          </div>
+
+          <h3 class="entry-title">Att tänka på</h3>
+          <p>
+            Alice verkade lite trött under eftermiddagen. Det kan vara bra med en lugn kväll hemma.
+          </p>
+        </article>
+      </section>
+
+      <section id="previous-days" class="previous-days hidden">
+        <h2 class="previous-days-title">Tidigare dagar</h2>
+
+        <article class="card previous-day-card">
+          <div class="previous-day-header">
+            <h3>Torsdag 4 april</h3>
+            <p class="subtitle">En aktiv dag med utelek och skapande</p>
+          </div>
+
+          <div class="mini-log-list">
+            <div class="mini-log-item">
+              <span class="mini-time">09:00</span>
+              <p>Samling med sång och sagoläsning.</p>
+            </div>
+
+            <div class="mini-log-item">
+              <span class="mini-time">10:30</span>
+              <p>Utelek på gården. Alice lekte mycket i sandlådan.</p>
+            </div>
+
+            <div class="mini-log-item">
+              <span class="mini-time">13:15</span>
+              <p>Vila i cirka 40 minuter efter lunch.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card previous-day-card">
+          <div class="previous-day-header">
+            <h3>Onsdag 3 april</h3>
+            <p class="subtitle">Lugn dag inomhus med pyssel</p>
+          </div>
+
+          <div class="mini-log-list">
+            <div class="mini-log-item">
+              <span class="mini-time">09:20</span>
+              <p>Målade med vattenfärger och deltog fint i gruppaktivitet.</p>
+            </div>
+
+            <div class="mini-log-item">
+              <span class="mini-time">11:45</span>
+              <p>Åt lunch bra och drack vatten till maten.</p>
+            </div>
+
+            <div class="mini-log-item">
+              <span class="mini-time">14:10</span>
+              <p>Byggde med klossar tillsammans med två andra barn.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card previous-day-card">
+          <div class="previous-day-header">
+            <h3>Tisdag 2 april</h3>
+            <p class="subtitle">Lite trött på eftermiddagen</p>
+          </div>
+
+          <div class="mini-log-list">
+            <div class="mini-log-item">
+              <span class="mini-time">08:15</span>
+              <p>Incheckad och glad vid lämning.</p>
+            </div>
+
+            <div class="mini-log-item">
+              <span class="mini-time">11:35</span>
+              <p>Åt något mindre av lunchen än vanligt.</p>
+            </div>
+
+            <div class="mini-log-item">
+              <span class="mini-time">14:45</span>
+              <p>Verkade lite trött under eftermiddagen. Lugna aktiviteter passade bäst.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="full-width">
+        <button class="btn" id="toggle-previous-days" type="button">
+          Visa tidigare dagar
+        </button>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-item">
+        <span class="nav-icon" data-icon="home" aria-hidden="true"></span>
+        <span class="sr-only">Dashboard</span>
+      </a>
+
+      <a href="kalender.html" class="nav-item">
+        <span class="nav-icon" data-icon="calendar" aria-hidden="true"></span>
+        <span class="sr-only">Kalender</span>
+      </a>
+
+      <a href="information.html" class="nav-item">
+        <span class="nav-icon" data-icon="alert-circle" aria-hidden="true"></span>
+        <span class="sr-only">Information</span>
+      </a>
+
+      <a href="loggbok.html" class="nav-item">
+        <span class="nav-icon" data-icon="book-open" aria-hidden="true"></span>
+        <span class="sr-only">Loggbok</span>
+      </a>
+
+      <a href="profil.html" class="nav-item">
+        <span class="nav-icon" data-icon="smile" aria-hidden="true"></span>
+        <span class="sr-only">Profil</span>
+      </a>
+    </nav>
+
+    <template id="response-template">
+      <div class="post-response">
+        <p class="response-label">Din respons</p>
+
+        <div class="response-actions">
+          <button class="response-btn" type="button" data-response="seen">✓ Sett</button>
+          <button class="response-btn" type="button" data-response="heart">❤️ Fint</button>
+          <button class="response-btn" type="button" data-response="thanks">Tack</button>
+        </div>
+      </div>
+    </template>
+  </body>
+</html>
