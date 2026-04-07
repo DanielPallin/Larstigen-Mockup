@@ -1,26 +1,39 @@
+/* Header */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 1rem;
   background: var(--white);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.shrink {
+  padding: 10px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .logo-small {
-  width: 40px;
-  height: 40px;
+  display: block;
+  width: 96px;
+  height: auto;
   object-fit: contain;
+  transition: width 0.3s ease;
 }
 
-.site-header h1 {
-  font-size: 1.8rem;
-  letter-spacing: 1px;
+.site-header.shrink .logo-small {
+  width: 44px;
 }
 
+/* Layout */
 .container {
   width: 100%;
   max-width: 600px;
@@ -40,6 +53,7 @@
   }
 }
 
+/* Cards */
 .card {
   margin-bottom: 15px;
   padding: 20px;
@@ -66,6 +80,8 @@
   font-weight: 600;
   color: var(--text-muted);
 }
+
+/* Knappar */
 
 .btn {
   display: inline-block;
@@ -109,22 +125,22 @@
   font-size: 2rem;
 }
 
-/* =========================
-   Bottom navigation
-========================= */
-
+/* Nav */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 110;
   width: 100%;
+
   display: flex;
   justify-content: space-around;
   align-items: center;
+
   padding: 10px 0;
   background: var(--white);
   border-top: 1px solid #e5e5e5;
+
   transform: translateY(0);
   transition: transform 0.3s ease;
 }
@@ -138,8 +154,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 60px;
   height: 50px;
+
   color: #9a958f;
   text-decoration: none;
   transition: color 0.2s ease, transform 0.15s ease;
