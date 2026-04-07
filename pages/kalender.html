@@ -1,3 +1,79 @@
+<<<<<<< feat/kalender-v1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lärstigen - Omsorgsschema</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/kalender.css" />
+  <script type="module" src="../ts/kalender.ts"></script>
+</head>
+<body>
+  <header>
+      <img src="/assets/favicon.PNG" alt="Logo" class="logo-small" />
+      <h1>Lärstigen</h1>
+    </header>
+
+    <div class="container">
+      <div class="card full-width">
+        <div class="week-header">
+          <button class="btn btn-small">◀</button>
+          <h3 class="card-title week-title">Vecka 42</h3>
+          <button class="btn btn-small">▶</button>
+        </div>
+        
+        <p class="subtitle active-template-text">
+          Aktiv mall: <strong>Standard Arbetsvecka</strong>
+        </p>
+
+        <div class="schedule-grid" id="schedule-grid">
+          <div class="day-row">
+            <span class="day-name">Mån</span>
+            <div class="time-inputs">
+              <input type="time" value="08:00" /> - <input type="time" value="16:00" />
+            </div>
+          </div>
+          <div class="day-row">
+            <span class="day-name">Tis</span>
+            <div class="time-inputs">
+              <input type="time" value="08:00" /> - <input type="time" value="16:00" />
+            </div>
+          </div>
+          <div class="day-row">
+            <span class="day-name">Ons</span>
+            <div class="time-inputs">
+              <input type="time" value="08:00" /> - <input type="time" value="15:00" />
+            </div>
+          </div>
+          <div class="day-row">
+            <span class="day-name">Tor</span>
+            <div class="time-inputs">
+              <input type="time" value="08:00" /> - <input type="time" value="16:00" />
+            </div>
+          </div>
+          <div class="day-row">
+            <span class="day-name">Fre</span>
+            <div class="time-inputs">
+              <input type="time" value="08:00" /> - <input type="time" value="14:00" />
+            </div>
+          </div>
+        </div>
+        <button class="btn save-btn">Spara Ändringar</button>
+      </div>
+
+      <div class="card full-width">
+        <h3 class="card-title">🔄 Rullande Schema</h3>
+        <p>Applicera ett standardschema över en längre period.</p>
+        <button class="btn btn-small btn-accent">
+          + Skapa ny mall (t.ex. Mamma-vecka)
+        </button>
+      </div>
+
+    </div>
+  
+=======
 <!doctype html>
 <html lang="sv">
   <head>
@@ -20,6 +96,7 @@
 
     </main>
 
+>>>>>>> main
     <nav class="bottom-nav">
       <a href="dashboard.html" class="nav-item">
         <span class="nav-icon" data-icon="home" aria-hidden="true"></span>

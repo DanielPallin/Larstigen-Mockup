@@ -1,0 +1,82 @@
+.week-header {
+  display: flex;
+  justify-content: center; /* Changes from space-between to center */
+  align-items: center;
+  gap: 30px; /* Gives the elements some nice breathing room */
+  margin-bottom: 15px;
+}
+
+.week-title {
+  margin: 0;
+  text-align: center;
+  min-width: 100px; /* Keeps the text area stable so arrows don't jump around when switching to "Vecka 9" vs "Vecka 42" */
+}
+
+/* We specifically target the buttons in the header to override the global settings */
+.week-header .btn-small {
+  width: auto; /* Stops the buttons from stretching to 100% */
+  min-width: 120px; /* Ensures they still have a good clickable area for thumbs */
+  padding: 8px 15px;
+}
+
+.active-template-text {
+  margin-bottom: 15px;
+  color: var(--primary-green);
+}
+
+.day-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.day-row:last-child {
+  border-bottom: none;
+}
+
+.day-name {
+  font-weight: bold;
+  width: 80px;
+}
+
+.time-inputs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+input[type="time"] {
+  padding: 5px;
+  border: 1px solid var(--accent-blue);
+  border-radius: 5px;
+  font-family: var(--font-body);
+}
+
+.btn-danger {
+  background-color: #d9534f;
+}
+
+.btn-small {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+.btn-accent {
+  background-color: var(--accent-blue);
+  color: var(--text-dark);
+}
+
+.save-btn {
+  margin-top: 20px;
+}
+
+.sick-leave-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.active-nav {
+  color: var(--primary-green);
+}
