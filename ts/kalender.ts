@@ -2,6 +2,9 @@ import { initGlobalUI } from "./global";
 import "/css/global.css";
 import "/css/components.css";
 import "/css/kalender.css";
+import "../css/global.css";
+import "../css/components.css";
+import "../css/kalender.css";
 
 function setupViewToggles(): void {
   // 1. Grab all the buttons and all the view sections
@@ -90,6 +93,12 @@ async function initPage(): Promise<void> {
   
   // Generate April 2026!
   generateMonthView(2026, 3); 
+
+async function initPage(): Promise<void> {
+  await initGlobalUI(); // Loads bottom nav scrolling, etc.
+  
+  // Initialize our new calendar toggles!
+  setupViewToggles();
 }
 
 initPage();
