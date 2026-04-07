@@ -1,6 +1,5 @@
-<!-- feat/kalender-v1 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +8,7 @@
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/kalender.css" />
   <script type="module" src="../ts/kalender.ts"></script>
+
 </head>
 <body>
     <header class="site-header">
@@ -17,7 +17,21 @@
       </div>
     </header>
 
-    <div class="container">
+  <div class="container">
+    
+    <div class="view-controls full-width">
+      <button class="view-btn" data-target="view-day">Dag</button>
+      <button class="view-btn active" data-target="view-week">Vecka</button>
+      <button class="view-btn" data-target="view-month">Månad</button>
+    </div>
+
+    <div id="view-day" class="view-section full-width" style="display: none;">
+      <div class="card full-width">
+        <h3 class="card-title" style="text-align: center;">Dagsvy kommer snart!</h3>
+      </div>
+    </div>
+
+    <div id="view-week" class="view-section active-view full-width">
       <div class="card full-width">
         <div class="week-header">
           <button class="btn btn-small">◀</button>
@@ -71,31 +85,30 @@
           + Skapa ny mall (t.ex. Mamma-vecka)
         </button>
       </div>
-
     </div>
-  
-<!-- ======= -->
-<!doctype html>
-<html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lärstigen - Kalender</title>
-    <script type="module" src="../ts/kalender.ts"></script>
-  </head>
 
-  <body>
-    <header class="site-header">
-      <div class="header-inner">
-        <img src="../assets/L-logo.png" alt="Lärstigen logotyp" class="logo-small" />
+    <div id="view-month" class="view-section full-width" style="display: none;">
+      <div class="card full-width">
+        <div class="week-header">
+          <button class="btn btn-small">◀</button>
+          <h3 class="card-title week-title">Oktober</h3>
+          <button class="btn btn-small">▶</button>
+        </div>
+        
+        <div class="month-grid" id="month-grid">
+          <div class="month-day-header">M</div>
+          <div class="month-day-header">T</div>
+          <div class="month-day-header">O</div>
+          <div class="month-day-header">T</div>
+          <div class="month-day-header">F</div>
+          <div class="month-day-header">L</div>
+          <div class="month-day-header">S</div>
+          
+         </div>
       </div>
-    </header>
+    </div>
 
-    <main class="container">
-
-      <p>Stevens sida</p>
-
-    </main>
+  </div>
 
 <!-- >>>>>>> main -->
     <nav class="bottom-nav">
@@ -124,6 +137,5 @@
         <span class="sr-only">Profil</span>
       </a>
     </nav>
-
-  </body>
+</body>
 </html>
