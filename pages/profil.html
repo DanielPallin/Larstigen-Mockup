@@ -3,28 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lärstigen - Barnprofil</title>
-    
-    <link rel="stylesheet" href="../css/global.css" />
-    
-    <link rel="stylesheet" href="../css/components.css" />
-    
-    <link rel="stylesheet" href="../css/barnprofil.css" />
-
-    <script type="module" src="../ts/barnprofil.ts"></script>
+    <title>Lärstigen - Profil</title>
+    <script type="module" src="../ts/profil.ts"></script>
   </head>
 
   <body>
-    <header>
-      <img
-        src="/assets/favicon.PNG"
-        alt="Logo"
-        class="logo-small"
-      />
-      <h1>Lärstigen</h1>
+    <header class="site-header">
+      <div class="header-inner">
+        <img src="../assets/L-logo.png" alt="Lärstigen logotyp" class="logo-small" />
+      </div>
     </header>
 
-    <div class="container">
+    <main class="container">
       <div class="card full-width">
         <div class="profile-header">
           <div class="avatar">👶</div>
@@ -61,8 +51,7 @@
         <p><strong>Erik (Pappa):</strong> 070-444 55 66</p>
         <button class="btn">Redigera profil</button>
       </div>
-    </div>
-
+    </main>
 
     <nav class="bottom-nav">
       <a href="dashboard.html" class="nav-item">
@@ -85,10 +74,11 @@
         <span class="sr-only">Loggbok</span>
       </a>
 
-      <a href="barnprofil.html" class="nav-item">
+      <a href="profil.html" class="nav-item">
         <span class="nav-icon" data-icon="smile" aria-hidden="true"></span>
-        <span class="sr-only">Barnprofil</span>
+        <span class="sr-only">Profil</span>
       </a>
     </nav>
+
   </body>
 </html>

@@ -1,3 +1,5 @@
+/*  Icons */
+
 const iconCache = new Map<string, string>();
 
 async function fetchIcon(name: string): Promise<string> {
@@ -5,7 +7,7 @@ async function fetchIcon(name: string): Promise<string> {
     return iconCache.get(name)!;
   }
 
-  const response = await fetch(`../assets/icons/${name}.svg`);
+  const response = await fetch(`/assets/icons/${name}.svg`);
 
   if (!response.ok) {
     throw new Error(`Kunde inte ladda ikon: ${name}`);
@@ -30,12 +32,21 @@ function normalizeSvg(svg: SVGSVGElement): void {
   svg.querySelectorAll("[stroke]").forEach((node) => {
     node.setAttribute("stroke", "currentColor");
   });
+
+  svg.querySelectorAll("[fill]").forEach((node) => {
+    const currentFill = node.getAttribute("fill");
+    if (currentFill && currentFill !== "none") {
+      node.setAttribute("fill", "none");
+    }
+  });
 }
 
 export async function loadIcons(): Promise<void> {
-  const iconHolders = document.querySelectorAll<HTMLElement>("[data-icon]");
+  const holders = document.querySelectorAll<HTMLElement>("[data-icon]");
 
-  for (const holder of iconHolders) {
+  for (const holder of holders) {
+    if (holder.querySelector("svg")) continue;
+
     const iconName = holder.dataset.icon;
     if (!iconName) continue;
 
@@ -53,6 +64,8 @@ export async function loadIcons(): Promise<void> {
   }
 }
 
+/* Nav */
+
 export function setActiveNav(): void {
   const currentPage = window.location.pathname.split("/").pop();
 
@@ -65,8 +78,8 @@ export function setActiveNav(): void {
 }
 
 export function initBottomNavScroll(threshold = 80): void {
-  const bottomNav = document.querySelector<HTMLElement>(".bottom-nav");
-  if (!bottomNav) return;
+  const nav = document.querySelector<HTMLElement>(".bottom-nav");
+  if (!nav) return;
 
   let lastScrollY = window.scrollY;
 
@@ -74,22 +87,40 @@ export function initBottomNavScroll(threshold = 80): void {
     const currentScrollY = window.scrollY;
 
     if (currentScrollY < 10) {
-      bottomNav.classList.remove("hide");
+      nav.classList.remove("hide");
       lastScrollY = currentScrollY;
       return;
     }
 
     if (currentScrollY > lastScrollY && currentScrollY > threshold) {
-      bottomNav.classList.add("hide");
+      nav.classList.add("hide");
     } else if (currentScrollY < lastScrollY) {
-      bottomNav.classList.remove("hide");
+      nav.classList.remove("hide");
     }
 
     lastScrollY = currentScrollY;
   });
 }
 
+/* Krympande header */
+
+export function initHeaderShrink(threshold = 60): void {
+  const header = document.querySelector<HTMLElement>(".site-header");
+  if (!header) return;
+
+  const updateHeader = (): void => {
+    header.classList.toggle("shrink", window.scrollY > threshold);
+  };
+
+  updateHeader();
+  window.addEventListener("scroll", updateHeader);
+}
+
+/* Global init*/
+
 export async function initGlobalUI(): Promise<void> {
   setActiveNav();
   await loadIcons();
+  initBottomNavScroll();
+  initHeaderShrink();
 }

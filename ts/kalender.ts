@@ -1,11 +1,13 @@
 import "../css/global.css";
 import "../css/components.css";
+import "../css/kalender.css";
 
-import { initBottomNavScroll, initGlobalUI } from "./global";
+import { initGlobalUI } from "./global";
 
-async function initKalenderPage(): Promise<void> {
+async function initPage(): Promise<void> {
   await initGlobalUI();
-  initBottomNavScroll();
+
+  // din extra kalender-logik här
 }
 
-initKalenderPage();
+initPage();
