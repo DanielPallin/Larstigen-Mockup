@@ -5,292 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DASHBOARD</title>
   <link rel="stylesheet" href="/css/dashboard.css">
+    <!-- <script type="module" src="../ts/dashboard.ts"></script> -->
+    <script type="module" src="../js/dashboard.js"></script>
+    <html lang="sv">
 </head>
 <body>
 
-<div id="root"></div>
+    <header class="site-header">
+      <div class="header-inner">
+        <img src="../assets/L-logo.png" alt="Lärstigen logotyp" class="logo-small" />
+      </div>
+    </header>
 
-<script type="module">
-  import React from 'https://esm.sh/react';
-  import ReactDOM from 'https://esm.sh/react-dom/client';
+    <main class="container">
+      <section class="page-title">
+        <h1>Överblick</h1>
+      </section>
 
-  const mockData = {
-    siblings: [
-      { id: 1, name: 'Alice', avatar: '👧', color: 'blue' },
-      { id: 2, name: 'Bob', avatar: '👦', color: 'yellow' },
-    ],
+      <section class="card">
+        <h2>Välj barn</h2>
+        <div id="child-filter" class="siblings-list"></div>
+      </section>
 
-    importantUpdates: [
-      { id: 1, childId: 1, message: 'Skolutflykt på fredag!' },
-      { id: 2, childId: 2, message: 'Glöm inte att ta med regnkläder imorgon fredag.' },
-    ],
+      <section class="card">
+        <h2>Viktiga uppdateringar</h2>
+        <ul id="important-updates" class="info-list"></ul>
+      </section>
 
-    upcomingEvents: [
-      { id: 1, childId: 1, title: 'Föräldramöte', date: '2024-06-10' },
-      { id: 2, childId: 2, title: 'Skolavslutning', date: '2024-06-20' },
-    ],
-  };
+      <section class="card">
+  <h2>Vem hämtar idag</h2>
 
-  function Dashboard() {
-    const [selectedChildren, setSelectedChildren] = React.useState([]);
-    const [pickupName, setPickupName] = React.useState("");
-    const [savedPickupName, setSavedPickupName] = React.useState("");
+  <form id="pickup-form" class="stack">
+    <p id="pickup-selected-children" class="selected-children-text">
+      Välj barn högst upp först
+    </p>
 
-    function toggleChild(id) {
-      setSelectedChildren((prev) =>
-        prev.includes(id)
-          ? prev.filter((childId) => childId !== id)
-          : [...prev, id]
-      );
-    }
+    <label class="field">
+      <span>Namn:</span>
+      <input
+        type="text"
+        id="pickup-name"
+        name="pickupName"
+        placeholder="Skriv namn här"
+        required
+      />
+    </label>
 
-    const filteredUpdates =
-      selectedChildren.length === 0
-        ? mockData.importantUpdates
-        : mockData.importantUpdates.filter((update) =>
-            selectedChildren.includes(update.childId)
-          );
+    <button type="submit" class="primary-button">Spara</button>
+  </form>
 
-    const filteredUpcoming =
-      selectedChildren.length === 0
-        ? mockData.upcomingEvents
-        : mockData.upcomingEvents.filter((event) =>
-            selectedChildren.includes(event.childId)
-          );
+  <div id="pickup-results" class="stack-sm"></div>
+</section>
 
-    function getChildById(childId) {
-      return mockData.siblings.find((sibling) => sibling.id === childId);
-    }
+      <section class="card">
+        <h2>Frånvaroanmälan</h2>
 
-    return React.createElement(
-      "div",
-      { className: "dashboard" },
+        <form id="absence-form" class="stack">
+          <p id="selected-children-text" class="selected-children-text">
+            Välj barn högst upp först
+          </p>
 
-      React.createElement("h1", null, "Överblick"),
+          <label class="field">
+            <span>Frånvaro datum:</span>
+            <input type="date" id="absence-date" required />
+          </label>
 
-      React.createElement(
-        "section",
-        { className: "siblings-view" },
-        React.createElement("h2", null, "Välj barn"),
+          <button type="submit" id="absence-button" class="danger-button" disabled>
+            Anmäl frånvaro
+          </button>
+        </form>
+      </section>
 
-        React.createElement(
-          "div",
-          { className: "siblings-list" },
+      <section class="card">
+        <h2>Kommande händelser</h2>
+        <ul id="upcoming-events" class="info-list"></ul>
+      </section>
+    </main>
 
-          ...mockData.siblings.map((sibling) =>
-            React.createElement(
-              "label",
-              {
-                key: sibling.id,
-                className: `sibling-card selectable sibling-${sibling.color} ${
-                  selectedChildren.includes(sibling.id) ? "active" : ""
-                }`
-              },
+    <nav class="bottom-nav">
+      <a href="dashboard.html" class="nav-item active">
+        <span class="nav-icon" data-icon="home" aria-hidden="true">🏠</span>
+        <span class="sr-only">Dashboard</span>
+      </a>
 
-              React.createElement("input", {
-                type: "checkbox",
-                checked: selectedChildren.includes(sibling.id),
-                onChange: () => toggleChild(sibling.id)
-              }),
+      <a href="kalender.html" class="nav-item">
+        <span class="nav-icon" data-icon="calendar" aria-hidden="true">📅</span>
+        <span class="sr-only">Kalender</span>
+      </a>
 
-              React.createElement(
-                "span",
-                { className: "avatar" },
-                sibling.avatar
-              ),
+      <a href="information.html" class="nav-item">
+        <span class="nav-icon" data-icon="alert-circle" aria-hidden="true">ℹ️</span>
+        <span class="sr-only">Information</span>
+      </a>
 
-              React.createElement(
-                "p",
-                null,
-                `${sibling.name}`
-              )
-            )
-          )
-        )
-      ),
+      <a href="loggbok.html" class="nav-item">
+        <span class="nav-icon" data-icon="book-open" aria-hidden="true">📖</span>
+        <span class="sr-only">Loggbok</span>
+      </a>
 
-      React.createElement(
-        "section",
-        { className: "important-updates" },
-        React.createElement("h2", null, "Viktiga uppdateringar"),
-
-        React.createElement(
-          "ul",
-          null,
-
-          ...(filteredUpdates.length > 0
-            ? filteredUpdates.map((update) => {
-                const child = getChildById(update.childId);
-
-                return React.createElement(
-                  "li",
-                  {
-                    key: update.id,
-                    className: `notice-item notice-${child.color}`
-                  },
-
-                  React.createElement(
-                    "span",
-                    { className: `child-tag child-tag-${child.color}` },
-                    child.name
-                  ),
-
-                  React.createElement(
-                    "span",
-                    { className: "notice-text" },
-                    update.message
-                  )
-                );
-              })
-            : [
-                React.createElement(
-                  "li",
-                  { key: "empty-updates" },
-                  "Inga viktiga uppdateringar för valt barn."
-                )
-              ])
-        )
-      ),
-
-      React.createElement(
-        "section",
-        { className: "pickup-section" },
-
-        React.createElement("h2", null, "Vem hämtar idag"),
-
-        React.createElement(
-          "form",
-          {
-            onSubmit: (e) => {
-              e.preventDefault();
-              setSavedPickupName(pickupName);
-            }
-          },
-
-          React.createElement(
-            "label",
-            null,
-            "Namn:",
-            React.createElement("input", {
-              type: "text",
-              value: pickupName,
-              onChange: (e) => setPickupName(e.target.value),
-              placeholder: "Skriv namn här",
-              required: true
-            })
-          ),
-
-          React.createElement(
-            "button",
-            { type: "submit" },
-            "Spara"
-          )
-        ),
-
-        savedPickupName &&
-          React.createElement(
-            "p",
-            { className: "saved-pickup" },
-            `Idag hämtar: ${savedPickupName}`
-          )
-      ),
-
-      React.createElement(
-        "section",
-        { className: "absence-report" },
-
-        React.createElement("h2", null, "Frånvaroanmälan"),
-
-        React.createElement(
-          "form",
-          {
-            onSubmit: (e) => {
-              e.preventDefault();
-              console.log("Frånvaro för barn:", selectedChildren);
-            }
-          },
-
-          React.createElement(
-            "p",
-            { className: "selected-children-text" },
-            selectedChildren.length > 0
-              ? `Valda barn: ${mockData.siblings
-                  .filter((sibling) => selectedChildren.includes(sibling.id))
-                  .map((sibling) => sibling.name)
-                  .join(", ")}`
-              : "Välj barn högst upp först"
-          ),
-
-          React.createElement(
-            "label",
-            null,
-            "Frånvaro datum:",
-            React.createElement("input", {
-              type: "date",
-              required: true
-            })
-          ),
-
-          React.createElement(
-            "button",
-            {
-              type: "submit",
-              disabled: selectedChildren.length === 0
-            },
-            "Anmäl frånvaro"
-          )
-        )
-      ),
-
-      React.createElement(
-        "section",
-        { className: "upcoming-events" },
-        React.createElement("h2", null, "Kommande händelser"),
-
-        React.createElement(
-          "ul",
-          null,
-
-          ...(filteredUpcoming.length > 0
-            ? filteredUpcoming.map((event) => {
-                const child = getChildById(event.childId);
-
-                return React.createElement(
-                  "li",
-                  {
-                    key: event.id,
-                    className: `event-item event-${child.color}`
-                  },
-
-                  React.createElement(
-                    "span",
-                    { className: `child-tag child-tag-${child.color}` },
-                    child.name
-                  ),
-
-                  React.createElement(
-                    "span",
-                    { className: "event-text" },
-                    `${event.date} - ${event.title}`
-                  )
-                );
-              })
-            : [
-                React.createElement(
-                  "li",
-                  { key: "empty-events" },
-                  "Inga kommande händelser för valt barn."
-                )
-              ])
-        )
-      )
-    );
-  }
-
-  ReactDOM.createRoot(document.getElementById("root")).render(
-    React.createElement(Dashboard)
-  );
-</script>
+      <a href="profil.html" class="nav-item">
+        <span class="nav-icon" data-icon="smile" aria-hidden="true">😊</span>
+        <span class="sr-only">Profil</span>
+      </a>
+    </nav>
 
 
 </body>
