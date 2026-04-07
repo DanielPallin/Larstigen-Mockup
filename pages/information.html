@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lärstigen - Information</title>
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/information.css" />
+    <script type="module" src="/ts/global.ts"></script>
+
   </head>
 
   <body>
@@ -15,7 +20,54 @@
 
     <main class="container">
 
-      <p>Sandras sida</p>
+    <div class="alert">
+            ❗
+            <span>Påminnelse: Röd dag - Stängt <br>Långfredag 3/4 & Annandag påsk 6/4<br> Påsklov v. 14! 🐣</span>
+    </div>
+
+    <div class="card">
+        <div class="active-picture">👶</div>
+        <div class="profile-text">
+           <h2>Alice Andersson</h2>
+           <p><strong>Avdelning:</strong> Solstrålen</p>
+        </div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">⚠️ VIKTIG INFORMATION</h3>
+            
+        <details class="accordion-item">
+          <summary>❗Utflykt 9/4<span>+</span></summary>
+            <div class="content">
+              <p><strong>Torsdag 9/4</strong> Utflykt till biblioteket.</p>
+              <p>Vi kommer gå från förskolan kl. 9.00 så då behöver alla barn vara på plats. Ni som börjar kl. 9 behåll barnens ytterkläder på</p>
+            </div>
+        </details>
+      
+         <details class="accordion-item">
+            <summary>❗Påminnelse: Se över barnens kläder <span>+</span></summary>
+             <div class="content">
+                <p>Nu går vi in mot en varmare tid, det är viktigt att barnen har både varma kläder och lite svalare kläder för de kommande varma dagarna
+                 Det är även önskvärt att barnen har en vattenflaska och solkräm i sitt fack i hallen.</p>
+              </div>
+          </details>
+    </div>
+
+    <div class="card">
+        <h3 class="card-title">🍴 MATSEDEL</h3>
+          <details class="accordion-item">
+            <summary>Dagens lunch: Fiskpanetter <span class="menu-week">Se hela veckan +</span></summary>
+               <div class="content">
+                  <ul>
+                     <li><strong>Måndag:</strong><br> Köttbullar & makaroner</li>
+                     <li><strong>Tisdag:</strong><br> Fiskpanetter & remouladsås</li>
+                     <li><strong>Onsdag:</strong><br> Vegetarisk lasagne</li>
+                     <li><strong>Torsdag:</strong><br> Ärtsoppa & pannkakor</li>
+                     <li><strong>Fredag:</strong><br> Kycklingcurry</li>
+                   </ul>
+                </div>
+          </details>
+     </div>
 
     </main>
 
