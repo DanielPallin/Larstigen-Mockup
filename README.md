@@ -15,8 +15,8 @@ Sandra – Meddelandesida / Viktig info
 - 
 - ansvarar för tester (unit, integration, e2e)
 
-Julia – Dagboksida
-- utveckling av dagboksida
+Julia – Loggboksida
+- utveckling av loggboksida
 - API-anrop till Supabase
 - 
 - ansvarar för tester (unit, integration, e2e)

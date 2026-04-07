@@ -10,7 +10,7 @@ export default defineConfig({
         dashboard: resolve(__dirname, 'pages/dashboard.html'),
         barnprofil: resolve(__dirname, 'pages/barnprofil.html'),
         information: resolve(__dirname, 'pages/information.html'),
-        dagbok: resolve(__dirname, 'pages/dagbok.html'),
+        loggbok: resolve(__dirname, 'pages/loggbok.html'),
         kalender: resolve(__dirname, 'pages/kalender.html')
       }
     }
