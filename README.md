@@ -27,8 +27,8 @@ Steven – Kalenderöversikt / Schema
 - 
 - ansvarar för tester (unit, integration, e2e)
 
-Danne – Barnprofil
-- utveckling av barnprofilen
+Danne – Profil
+- utveckling av profilen
 - API-anrop till Supabase
 - 
 - ansvarar för tester (unit, integration, e2e)

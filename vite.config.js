@@ -8,7 +8,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         dashboard: resolve(__dirname, 'pages/dashboard.html'),
-        barnprofil: resolve(__dirname, 'pages/barnprofil.html'),
+        profil: resolve(__dirname, 'pages/profil.html'),
         information: resolve(__dirname, 'pages/information.html'),
         loggbok: resolve(__dirname, 'pages/loggbok.html'),
         kalender: resolve(__dirname, 'pages/kalender.html')
