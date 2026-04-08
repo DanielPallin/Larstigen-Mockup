@@ -1,82 +1,122 @@
 import { initGlobalUI } from "./global";
-import "/css/global.css";
-import "/css/components.css";
-import "/css/kalender.css";
+import "../css/global.css";
+import "../css/components.css";
+import "../css/kalender.css";
+
+// --- Application State ---
+let currentWeek = 42;
+let currentMonth = 3; // 0 = Jan, 3 = April
+let currentYear = 2026;
+
+const monthNames = [
+  "Januari", "Februari", "Mars", "April", "Maj", "Juni", 
+  "Juli", "Augusti", "September", "Oktober", "November", "December"
+];
 
 function setupViewToggles(): void {
-  // 1. Grab all the buttons and all the view sections
   const viewButtons = document.querySelectorAll<HTMLButtonElement>(".view-btn");
   const viewSections = document.querySelectorAll<HTMLElement>(".view-section");
 
-  // 2. Loop through each button and listen for a click
   viewButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      
-      // Step A: Reset all buttons (remove the green background)
       viewButtons.forEach((btn) => btn.classList.remove("active"));
-      
-      // Step B: Make the clicked button active
       button.classList.add("active");
-
-      // Step C: Find out which view this button is supposed to open
       const targetId = button.getAttribute("data-target");
 
-      // Step D: Loop through all sections. Show the target one, hide the rest!
       viewSections.forEach((section) => {
         if (section.id === targetId) {
-          section.style.display = "block"; // Show it
+          section.style.display = "block";
         } else {
-          section.style.display = "none";  // Hide it
+          section.style.display = "none";
         }
       });
-      
     });
   });
+}
+
+function setupWeekNavigation(): void {
+  const btnPrev = document.getElementById("btn-prev-week");
+  const btnNext = document.getElementById("btn-next-week");
+  const titleDisplay = document.getElementById("week-title-display");
+
+  if (!btnPrev || !btnNext || !titleDisplay) return;
+
+  btnPrev.addEventListener("click", () => {
+    // Decrement, but wrap back to 52 if we go below 1
+    currentWeek = currentWeek <= 1 ? 52 : currentWeek - 1;
+    titleDisplay.textContent = `Vecka ${currentWeek}`;
+  });
+
+  btnNext.addEventListener("click", () => {
+    // Increment, but wrap back to 1 if we go above 52
+    currentWeek = currentWeek >= 52 ? 1 : currentWeek + 1;
+    titleDisplay.textContent = `Vecka ${currentWeek}`;
+  });
+}
+
+function setupMonthNavigation(): void {
+  const btnPrev = document.getElementById("btn-prev-month");
+  const btnNext = document.getElementById("btn-next-month");
+  const titleDisplay = document.getElementById("month-title-display");
+
+  if (!btnPrev || !btnNext || !titleDisplay) return;
+
+  btnPrev.addEventListener("click", () => {
+    currentMonth--;
+    if (currentMonth < 0) {
+      currentMonth = 11; // Wrap to December
+      currentYear--;     // Go back a year
+    }
+    updateMonthDisplay(titleDisplay);
+  });
+
+  btnNext.addEventListener("click", () => {
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;  // Wrap to January
+      currentYear++;     // Go forward a year
+    }
+    updateMonthDisplay(titleDisplay);
+  });
+}
+
+function updateMonthDisplay(titleDisplay: HTMLElement): void {
+  // Update the text in the header
+  titleDisplay.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+  // Re-run the generation function with the new state
+  generateMonthView(currentYear, currentMonth);
 }
 
 function generateMonthView(year: number, month: number): void {
   const grid = document.getElementById("month-grid");
   if (!grid) return;
 
+  // --- THE FLUSH ---
+  // Select all existing days and remove them, but leave the M, T, O headers intact!
+  const existingDays = grid.querySelectorAll(".month-day");
+  existingDays.forEach((day) => day.remove());
+
   // Step 1: The Math
-  // JS Date months are 0-indexed (0 = Jan, 3 = April).
-  // Getting day 0 of the *next* month magically gives us the total days of *this* month!
   const daysInMonth = new Date(year, month + 1, 0).getDate(); 
-  
-  // Get the weekday of the 1st of the month. JS says Sunday = 0, Monday = 1.
   const firstDay = new Date(year, month, 1).getDay(); 
-  
-  // Swedish weeks start on Monday! So we convert the JS math: 
-  // If it's Sunday (0), make it index 6. Otherwise, shift it back by 1.
   const emptyBlocksToStart = firstDay === 0 ? 6 : firstDay - 1;
 
-  // Step 2: The Painting (Injecting into HTML)
-  // First, inject the empty blocks for the offset
+  // Step 2: The Painting
   for (let i = 0; i < emptyBlocksToStart; i++) {
     const emptyDiv = document.createElement("div");
     emptyDiv.className = "month-day empty";
     grid.appendChild(emptyDiv);
   }
 
-  // Next, loop through the actual days and create the squares
   for (let day = 1; day <= daysInMonth; day++) {
     const dayDiv = document.createElement("div");
     dayDiv.className = "month-day";
     dayDiv.textContent = day.toString();
 
-    // --- MOCKUP DATA ---
-    // Let's pretend today is April 7th, 2026, and Alice has a schedule these days:
-    if (day === 7) {
-      dayDiv.classList.add("is-today");
-    }
-    
-    if ([2, 3, 6, 8, 9, 10].includes(day)) {
-      dayDiv.classList.add("has-schedule");
-    }
-    
-    // Quick math to check if this day falls on a weekend
+    // Remove the hardcoded mockup data for now since it only applied to April 2026,
+    // or keep the weekend logic as it applies universally!
     const currentWeekday = (emptyBlocksToStart + day - 1) % 7;
-    if (currentWeekday === 5 || currentWeekday === 6) { // 5=Sat, 6=Sun
+    if (currentWeekday === 5 || currentWeekday === 6) { 
       dayDiv.classList.add("weekend");
     }
 
@@ -87,9 +127,11 @@ function generateMonthView(year: number, month: number): void {
 async function initPage(): Promise<void> {
   await initGlobalUI();
   setupViewToggles();
+  setupWeekNavigation();
+  setupMonthNavigation();
   
-  // Generate April 2026!
-  generateMonthView(2026, 3); 
+  // Set the initial month view on load
+  generateMonthView(currentYear, currentMonth); 
 }
 
 initPage();
