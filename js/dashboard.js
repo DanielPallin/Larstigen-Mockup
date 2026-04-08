@@ -1,8 +1,19 @@
 const mockData = {
   siblings: [
-    { id: 1, name: "Alice", age: 5, avatar: "👧", color: "blue" },
-    { id: 2, name: "Bob", age: 3, avatar: "👦", color: "yellow" },
-  ],
+    
+  {
+    id: 1,
+    name: "Alice",
+    avatar: "/assets/child1.jpg",
+    color: "blue"
+  },
+  {
+    id: 2,
+    name: "Maja",
+    avatar: "/assets/child4.jpg",
+    color: "yellow"
+  ,}
+],
 
   importantUpdates: [
     { id: 1, childId: 1, message: "Skolutflykt på fredag!" },
@@ -74,12 +85,13 @@ function createChildCard(sibling, checked, onToggle) {
     onToggle(sibling.id);
   });
 
-  const avatar = document.createElement("span");
+  const avatar = document.createElement("img");
   avatar.className = "avatar";
-  avatar.textContent = sibling.avatar;
+  avatar.src = sibling.avatar;
+  avatar.alt = sibling.name;
 
   const text = document.createElement("p");
-  text.textContent = `${sibling.name}, ${sibling.age} år`;
+  text.textContent = `${sibling.name}`;
 
   label.append(checkbox, avatar, text);
   return label;
