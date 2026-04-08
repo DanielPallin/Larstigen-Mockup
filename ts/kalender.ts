@@ -13,6 +13,14 @@ const monthNames = [
   "Juli", "Augusti", "September", "Oktober", "November", "December"
 ];
 
+// Tells TS what the public holiday API data looks like
+interface SvenskDag {
+  datum: string;
+  veckodag: string;
+  "röd dag": "Ja" | "Nej";
+  helgdag?: string;
+}
+
 function setupViewToggles(): void {
   const viewButtons = document.querySelectorAll<HTMLButtonElement>(".view-btn");
   const viewSections = document.querySelectorAll<HTMLElement>(".view-section");
@@ -124,6 +132,28 @@ function generateMonthView(year: number, month: number): void {
   }
 }
 
+async function fetchHolidays(year: number, month: number): Promise<void> {
+  try {
+    // The API requires the month to be formatted with a leading zero (e.g., "04" for April)
+    const formattedMonth = month < 10 ? `0${month}` : `${month}`;
+    const url = `https://api.dryg.net/dagar/v2.1/${year}/${formattedMonth}`;
+    
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    // Filter out only the red days!
+    const redDays = data.dagar.filter((dag: SvenskDag) => dag["röd dag"] === "Ja" && dag.helgdag);
+    
+    console.log(`Hittade ${redDays.length} röda dagar i ${year}-${formattedMonth}:`);
+    redDays.forEach((dag: SvenskDag) => {
+      console.log(`- ${dag.datum}: ${dag.helgdag}`);
+    });
+
+  } catch (error) {
+    console.error("Kunde inte hämta helgdagar:", error);
+  }
+}
+
 async function initPage(): Promise<void> {
   await initGlobalUI();
   setupViewToggles();
@@ -132,6 +162,8 @@ async function initPage(): Promise<void> {
   
   // Set the initial month view on load
   generateMonthView(currentYear, currentMonth); 
+
+  fetchHolidays(2026, 4); // Testing for April 2026
 }
 
 initPage();
