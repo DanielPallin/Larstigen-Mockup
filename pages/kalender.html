@@ -1,6 +1,5 @@
-<!-- feat/kalender-v1 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +8,7 @@
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/kalender.css" />
   <script type="module" src="../ts/kalender.ts"></script>
+
 </head>
 <body>
     <header class="site-header">
@@ -17,12 +17,26 @@
       </div>
     </header>
 
-    <div class="container">
+  <div class="container">
+    
+    <div class="view-controls full-width">
+      <button class="view-btn" data-target="view-day">Dag</button>
+      <button class="view-btn active" data-target="view-week">Vecka</button>
+      <button class="view-btn" data-target="view-month">Månad</button>
+    </div>
+
+    <div id="view-day" class="view-section full-width" style="display: none;">
+      <div class="card full-width">
+        <h3 class="card-title" style="text-align: center;">Dagsvy kommer snart!</h3>
+      </div>
+    </div>
+
+    <div id="view-week" class="view-section active-view full-width">
       <div class="card full-width">
         <div class="week-header">
-          <button class="btn btn-small">◀</button>
-          <h3 class="card-title week-title">Vecka 42</h3>
-          <button class="btn btn-small">▶</button>
+          <button class="btn btn-small" id="btn-prev-week">◀</button>
+          <h3 class="card-title week-title" id="week-title-display">Vecka 42</h3>
+          <button class="btn btn-small" id="btn-next-week">▶</button>
         </div>
         
         <p class="subtitle active-template-text">
@@ -67,35 +81,39 @@
       <div class="card full-width">
         <h3 class="card-title">🔄 Rullande Schema</h3>
         <p>Applicera ett standardschema över en längre period.</p>
-        <button class="btn btn-small btn-accent">
+        <button class="btn btn-small btn-accent" style="margin-bottom: 15px;">
           + Skapa ny mall (t.ex. Mamma-vecka)
         </button>
+        
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; padding-top: 15px; border-top: 1px solid var(--border-light);">
+          <input type="checkbox" id="apply-all-children" style="width: 20px; height: 20px; accent-color: var(--primary-green);">
+          <label for="apply-all-children" style="font-weight: bold; color: var(--text-dark);">Tillämpa till alla mina barn</label>
+        </div>
       </div>
-
     </div>
-  
-<!-- ======= -->
-<!doctype html>
-<html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lärstigen - Kalender</title>
-    <script type="module" src="../ts/kalender.ts"></script>
-  </head>
 
-  <body>
-    <header class="site-header">
-      <div class="header-inner">
-        <img src="../assets/L-logo.png" alt="Lärstigen logotyp" class="logo-small" />
+    <div id="view-month" class="view-section full-width" style="display: none;">
+      <div class="card full-width">
+        <div class="week-header">
+          <button class="btn btn-small" id="btn-prev-month">◀</button>
+          <h3 class="card-title week-title" id="month-title-display">April 2026</h3>
+          <button class="btn btn-small" id="btn-next-month">▶</button>
+        </div>
+        
+        <div class="month-grid" id="month-grid">
+          <div class="month-day-header">M</div>
+          <div class="month-day-header">T</div>
+          <div class="month-day-header">O</div>
+          <div class="month-day-header">T</div>
+          <div class="month-day-header">F</div>
+          <div class="month-day-header">L</div>
+          <div class="month-day-header">S</div>
+          
+         </div>
       </div>
-    </header>
+    </div>
 
-    <main class="container">
-
-      <p>Stevens sida</p>
-
-    </main>
+  </div>
 
 <!-- >>>>>>> main -->
     <nav class="bottom-nav">
@@ -124,6 +142,5 @@
         <span class="sr-only">Profil</span>
       </a>
     </nav>
-
-  </body>
+</body>
 </html>
