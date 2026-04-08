@@ -3,6 +3,21 @@ import "../css/global.css";
 import "../css/components.css";
 import "../css/kalender.css";
 
+// Tells TS what the public holiday API data looks like
+interface SvenskDag {
+  datum: string;
+  veckodag: string;
+  "röd dag": "Ja" | "Nej";
+  helgdag?: string;
+}
+
+// Define the shape of our template data from Supabase
+interface ScheduleTemplate {
+  id: string;
+  name: string;
+  is_active: boolean;
+}
+
 // --- Application State ---
 let currentWeek = 42;
 let currentMonth = 3; // 0 = Jan, 3 = April
@@ -12,14 +27,6 @@ const monthNames = [
   "Januari", "Februari", "Mars", "April", "Maj", "Juni", 
   "Juli", "Augusti", "September", "Oktober", "November", "December"
 ];
-
-// Tells TS what the public holiday API data looks like
-interface SvenskDag {
-  datum: string;
-  veckodag: string;
-  "röd dag": "Ja" | "Nej";
-  helgdag?: string;
-}
 
 function setupViewToggles(): void {
   const viewButtons = document.querySelectorAll<HTMLButtonElement>(".view-btn");
@@ -154,11 +161,62 @@ async function fetchHolidays(year: number, month: number): Promise<void> {
   }
 }
 
+// Simulated Supabase Fetch
+async function fetchAndRenderTemplates(): Promise<void> {
+  const container = document.getElementById("template-list");
+  if (!container) return;
+
+  // This is your exact data from the Supabase query!
+  // In the real version, this will be: const { data } = await supabase.from('schedule_template').select('*');
+  const mockSupabaseData: ScheduleTemplate[] = [
+    {
+      "id": "b817d456-9a6b-4e7c-8b21-26e5f8d9c0b1",
+      "name": "Mamma-vecka (Kort fredag)",
+      "is_active": false
+    },
+    {
+      "id": "c942e123-8b7a-4c8f-9d32-15f4e7c8b9a0",
+      "name": "Standard Arbetsvecka",
+      "is_active": true
+    }
+  ];
+
+  // Clear any existing content
+  container.innerHTML = "";
+
+  // Loop through the data and paint it to the screen
+  mockSupabaseData.forEach((template) => {
+    const card = document.createElement("div");
+    card.className = "template-item";
+    
+    // Check if it's active to render the green badge
+    const activeBadgeHTML = template.is_active 
+      ? `<span class="badge badge-active">Aktiv Nu</span>` 
+      : ``;
+
+    card.innerHTML = `
+      <div class="template-header">
+        <span class="template-name">${template.name}</span>
+        ${activeBadgeHTML}
+      </div>
+      <div class="template-actions">
+        <button class="btn btn-small btn-outline" data-id="${template.id}">Redigera</button>
+        <button class="btn btn-small" data-id="${template.id}">Tillämpa</button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
 async function initPage(): Promise<void> {
   await initGlobalUI();
   setupViewToggles();
   setupWeekNavigation();
   setupMonthNavigation();
+
+  // Fetch and render our templates!
+  await fetchAndRenderTemplates();
   
   // Set the initial month view on load
   generateMonthView(currentYear, currentMonth); 

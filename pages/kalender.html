@@ -20,79 +20,38 @@
   <div class="container">
     
     <div class="view-controls full-width">
-      <button class="view-btn" data-target="view-day">Dag</button>
-      <button class="view-btn active" data-target="view-week">Vecka</button>
-      <button class="view-btn" data-target="view-month">Månad</button>
+      <button class="view-btn" data-target="view-create">Skapa Schema</button>
+      <button class="view-btn active" data-target="view-schema">Schema</button>
+      <button class="view-btn" data-target="view-overview">Översikt</button>
     </div>
 
-    <div id="view-day" class="view-section full-width" style="display: none;">
+    <div id="view-create" class="view-section active-view full-width" style="display: none;">
+      
       <div class="card full-width">
-        <h3 class="card-title" style="text-align: center;">Dagsvy kommer snart!</h3>
-      </div>
-    </div>
-
-    <div id="view-week" class="view-section active-view full-width">
-      <div class="card full-width">
-        <div class="week-header">
-          <button class="btn btn-small" id="btn-prev-week">◀</button>
-          <h3 class="card-title week-title" id="week-title-display">Vecka 42</h3>
-          <button class="btn btn-small" id="btn-next-week">▶</button>
-        </div>
+        <h3 class="card-title">📋 Mina Mallar</h3>
+        <p class="subtitle" style="margin-bottom: 15px;">Dina sparade rullande scheman.</p>
         
-        <p class="subtitle active-template-text">
-          Aktiv mall: <strong>Standard Arbetsvecka</strong>
-        </p>
+        <div id="template-list"></div>
 
-        <div class="schedule-grid" id="schedule-grid">
-          <div class="day-row">
-            <span class="day-name">Mån</span>
-            <div class="time-inputs">
-              <input type="time" value="08:00" /> - <input type="time" value="16:00" />
-            </div>
-          </div>
-          <div class="day-row">
-            <span class="day-name">Tis</span>
-            <div class="time-inputs">
-              <input type="time" value="08:00" /> - <input type="time" value="16:00" />
-            </div>
-          </div>
-          <div class="day-row">
-            <span class="day-name">Ons</span>
-            <div class="time-inputs">
-              <input type="time" value="08:00" /> - <input type="time" value="15:00" />
-            </div>
-          </div>
-          <div class="day-row">
-            <span class="day-name">Tor</span>
-            <div class="time-inputs">
-              <input type="time" value="08:00" /> - <input type="time" value="16:00" />
-            </div>
-          </div>
-          <div class="day-row">
-            <span class="day-name">Fre</span>
-            <div class="time-inputs">
-              <input type="time" value="08:00" /> - <input type="time" value="14:00" />
-            </div>
-          </div>
-        </div>
-        <button class="btn save-btn">Spara Ändringar</button>
-      </div>
-
-      <div class="card full-width">
-        <h3 class="card-title">🔄 Rullande Schema</h3>
-        <p>Applicera ett standardschema över en längre period.</p>
-        <button class="btn btn-small btn-accent" style="margin-bottom: 15px;">
-          + Skapa ny mall (t.ex. Mamma-vecka)
-        </button>
-        
-        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; padding-top: 15px; border-top: 1px solid var(--border-light);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-light);">
           <input type="checkbox" id="apply-all-children" style="width: 20px; height: 20px; accent-color: var(--primary-green);">
-          <label for="apply-all-children" style="font-weight: bold; color: var(--text-dark);">Tillämpa till alla mina barn</label>
+          <label for="apply-all-children" style="font-weight: bold; color: var(--text-dark);">Tillämpa mall till alla mina barn</label>
         </div>
+
+        <button class="btn btn-small btn-accent" style="margin-top: 15px;">
+          + Skapa ny mall
+        </button>
+      </div>
+
+      </div>
+
+    <div id="view-schema" class="view-section full-width">
+      <div class="card full-width">
+        <h3 class="card-title" style="text-align: center;">Bekräftat Schema kommer här</h3>
       </div>
     </div>
 
-    <div id="view-month" class="view-section full-width" style="display: none;">
+    <div id="view-overview" class="view-section full-width" style="display: none;">
       <div class="card full-width">
         <div class="week-header">
           <button class="btn btn-small" id="btn-prev-month">◀</button>
